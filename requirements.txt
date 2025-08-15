@@ -1,0 +1,9 @@
+numpy>=1.15.4
+pandas
+xarray
+dask
+netCDF4 
+bottleneck
+joblib
+pysftp
+requests
