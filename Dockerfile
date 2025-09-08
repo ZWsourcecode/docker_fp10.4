@@ -10,7 +10,7 @@ WORKDIR /usr/local/src
 RUN apt-get -y update  
 RUN apt-get -yq install --no-install-recommends sudo apt-utils build-essential make
 RUN apt-get -yq install gcc cmake gfortran m4 autoconf libtool automake flex bison
-RUN apt-get -yq install python3 python3-pip python3-eccodes python3-genshi python3-numpy unzip wget curl ssh bc git-core vim
+RUN apt-get -yq install python3 python3-pip python3-eccodes python3-genshi python3-numpy unzip wget curl ssh bc git-core vim nano
  
 ######################################################
 # flexpart 
