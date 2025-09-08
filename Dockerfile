@@ -88,6 +88,9 @@ RUN python3 -m pip install --upgrade pip
 RUN pip3 install --upgrade setuptools
 RUN pip3 install -r requirements.txt
 
+# install dos2unix
+RUN apt-get -yq install dos2unix
+
 # install fluxpart
 COPY flexpart_v10.4 /usr/local/flexpart_v10.4
 COPY makefile.ecmwf.gfortran.flexpart10.4 /usr/local/flexpart_v10.4/src/makefile
@@ -97,11 +100,10 @@ WORKDIR /flexpart
 RUN cp -r /usr/local/flexpart_v10.4/options /flexpart/  && \
     cp /usr/local/flexpart_v10.4/pathnames /flexpart/
 
-RUN apt-get -yq install dos2unix
-
 COPY *.sh /flexpart/
 COPY *.py /flexpart/
 COPY *.conf /flexpart/
+COPY .env /flexpart/
 
 RUN chmod +x setattribute_mon.sh setattribute_mon_eu.sh
 

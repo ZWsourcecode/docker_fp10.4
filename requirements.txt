@@ -7,3 +7,4 @@ bottleneck
 joblib
 pysftp
 requests
+dotenv
