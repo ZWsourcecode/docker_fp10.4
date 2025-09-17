@@ -11,7 +11,7 @@ F_PATH="/flexpart"
 
 ID=24              # Species ID (currently only supports one)
 STEP=1             # Time step in hours
-PARTICLES=100      # Number of particles to be released
+PARTICLES=200      # Number of particles to be released
 
 # Define arguments for each station
 ARGS_LIST=(

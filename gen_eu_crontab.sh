@@ -8,7 +8,7 @@ POSTSCRIPT="/flexpart/postprocess_eu.py"
 
 ID=24              # Species ID (currently only supports one)
 STEP=1             # Time step in hours
-PARTICLES=100      # Number of particles to be released
+PARTICLES=200      # Number of particles to be released
 
 START_HOUR=0      # First job starts at 0:05
 START_MIN=5
