@@ -4,8 +4,8 @@
 ### zhendong.wu@nateko.lu.se
 
 cd $1
-
-for hour in $(ls -d */)
+OUT_FOLDER=$2
+for hour in $(ls -d ${OUT_FOLDER}*/)
 do
     cd $hour
 

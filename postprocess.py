@@ -90,18 +90,18 @@ def parallel_footprint(npoint, IN_PATH, OUT_PATH, darray_fp, darray_hmix, pd_ati
     darry_foot2d.lat.attrs['description'] = "grid cell centers"
     
     # make directory 
-    OUT_FLODER = Station.upper() + "/" + str(atime.year) + "/" + str(atime.month).zfill(2) + "/"
-    OUT_FLODER = OUT_FLODER + str(atime.year) + "x" + str(atime.month).zfill(2) + "x" + str(atime.day).zfill(2) + "x" + str(atime.hour).zfill(2)+ "/"
-    OUT_FLODER = OUT_PATH + OUT_FLODER
+    OUT_FOLDER = Station.upper() + "/" + str(atime.year) + "/" + str(atime.month).zfill(2) + "/"
+    OUT_FOLDER = OUT_FOLDER + str(atime.year) + "x" + str(atime.month).zfill(2) + "x" + str(atime.day).zfill(2) + "x" + str(atime.hour).zfill(2)+ "/"
+    OUT_FOLDER = OUT_PATH + OUT_FOLDER
 
-    Path(OUT_FLODER).mkdir(parents=True, exist_ok=True) 
+    Path(OUT_FOLDER).mkdir(parents=True, exist_ok=True) 
     if ifnest==0:
-        file_path_name = OUT_FLODER + "foot"
+        file_path_name = OUT_FOLDER + "foot"
     else:
-        file_path_name = OUT_FLODER + "foot_nest"
+        file_path_name = OUT_FOLDER + "foot_nest"
     darry_foot2d.to_netcdf(file_path_name)
     
-    return OUT_FLODER
+    return OUT_FOLDER
 
 def loop_footprint (npoint, IN_PATH, OUT_PATH, darray_fp, darray_hmix, pd_atime, pd_time, ifnest=0):
     """sum footprint during backtime (e.g. 10 days), and save as netcdf per arriving time.
@@ -162,15 +162,15 @@ def loop_footprint (npoint, IN_PATH, OUT_PATH, darray_fp, darray_hmix, pd_atime,
     darry_foot2d.lat.attrs['description'] = "grid cell centers"
     
     # make directory 
-    OUT_FLODER = Station.upper() + "/" + str(atime.year) + "/" + str(atime.month).zfill(2) + "/"
-    OUT_FLODER = OUT_FLODER + str(atime.year) + "x" + str(atime.month).zfill(2) + "x" + str(atime.day).zfill(2) + "x" + str(atime.hour).zfill(2)+ "/"
-    OUT_FLODER = OUT_PATH + OUT_FLODER
+    OUT_FOLDER = Station.upper() + "/" + str(atime.year) + "/" + str(atime.month).zfill(2) + "/"
+    OUT_FOLDER = OUT_FOLDER + str(atime.year) + "x" + str(atime.month).zfill(2) + "x" + str(atime.day).zfill(2) + "x" + str(atime.hour).zfill(2)+ "/"
+    OUT_FOLDER = OUT_PATH + OUT_FOLDER
 
-    Path(OUT_FLODER).mkdir(parents=True, exist_ok=True) 
+    Path(OUT_FOLDER).mkdir(parents=True, exist_ok=True) 
     if ifnest==0:
-        file_path_name = OUT_FLODER + "foot"
+        file_path_name = OUT_FOLDER + "foot"
     else:
-        file_path_name = OUT_FLODER + "foot_nest"
+        file_path_name = OUT_FOLDER + "foot_nest"
     darry_foot2d.to_netcdf(file_path_name)    
 
 def get_footprint(prefix, IN_PATH, OUT_PATH, Station, Project, Year, Month, Day, cpus=1):
@@ -286,8 +286,8 @@ cpus=1
 get_footprint(prefix, IN_PATH, OUT_PATH, Station, Project, str(Year), str(Month).zfill(2), str(Day).zfill(2), cpus=cpus)
 
 ATT_PATH = OUT_PATH + Station.upper() + "/" + str(Year) + "/" + str(Month).zfill(2)
-
-command = ["/flexpart/setattribute_mon.sh", ATT_PATH]
+OUT_FOLDER = str(Year) + "x" + str(Month).zfill(2) + "x" + str(Day).zfill(2)
+command = ["/flexpart/setattribute_mon.sh", ATT_PATH, OUT_FOLDER]
 
 # system("chmod +x setattribute_mon.sh")
 # Run the command
