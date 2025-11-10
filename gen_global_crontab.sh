@@ -10,8 +10,8 @@ ID=24              # Species ID (currently only supports one)
 STEP=1             # Time step in hours
 PARTICLES=500      # Number of particles to be released
 
-START_HOUR=15      # First job starts at 15:20
-START_MIN=20
+START_HOUR=12      # First job starts at 12:10 UTC (CET 13:10)
+START_MIN=10
 
 # --- Initial Time Setup ---
 MINUTE=$START_MIN

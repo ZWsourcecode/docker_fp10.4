@@ -30,9 +30,9 @@ output=${output}${prefix}/${simulationidproject}/ # e.g. xxx/htm/htm150C14eu/
 
 date -u
 
-# simulate the day 3 days ago
-start=$(date -u -d "-3 days" +%Y%m%d)
-end=$(date -u -d "-2 days" +%Y%m%d)
+# simulate the day 2 days ago
+start=$(date -u -d "-2 days" +%Y%m%d)
+end=$(date -u -d "-1 days" +%Y%m%d)
 year=$(date -u -d "$start" +%Y)
 
 echo simulating $simulationid $start
