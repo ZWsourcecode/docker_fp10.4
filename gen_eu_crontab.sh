@@ -33,7 +33,7 @@ while read -r station lon lat z cpuid; do
     POST_HOUR=$((HOUR + 1))
     (( POST_HOUR >= 24 )) && POST_HOUR=0
 
-    echo "$MINUTE $POST_HOUR * * * taskset -c $cpuid /usr/bin/python3 $POSTSCRIPT $station \$(date -u -d \"-3 days\" +\\%Y-\\%m-\\%d) >> /flexpart/logpython$station"
+    echo "$MINUTE $POST_HOUR * * * taskset -c $cpuid /usr/bin/python3 $POSTSCRIPT $station \$(date -u -d \"-2 days\" +\\%Y-\\%m-\\%d) >> /flexpart/logpython$station"
     echo
 
     # Increment time by 10 minutes
