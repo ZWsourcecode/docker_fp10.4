@@ -15,6 +15,7 @@ import datetime as dt
 import pandas as pd
 import os
 import argparse
+import sys
 from pathlib import Path
 
 # Configuration
@@ -52,7 +53,7 @@ def load_station_config(config_file):
         if len(parts) >= 5:  # Ensure we have all required columns
             data.append(parts)
         else:
-            print(f"Warning: Skipping malformed line: {line}")
+            print(f"Warning: Skipping malformed line: {line}", flush=True)
     
     if not data:
         raise ValueError(f"No valid station data found in {config_file}")
@@ -70,7 +71,7 @@ def process_stations(config_file, domain, target_date, specific_station=None):
         target_date (datetime.date): Date for processing
         specific_station (str, optional): Process only this specific station
     """
-    print(f"\n=== Processing {domain.upper()} domain stations ===")
+    print(f"\n=== Processing {domain.upper()} domain stations ===", flush=True)
     
     try:
         station_conf = load_station_config(config_file)
@@ -80,28 +81,28 @@ def process_stations(config_file, domain, target_date, specific_station=None):
         if specific_station:
             stations = [s for s in stations if s.lower() == specific_station.lower()]
             if not stations:
-                print(f"Station '{specific_station}' not found in {config_file}")
+                print(f"Station '{specific_station}' not found in {config_file}", flush=True)
                 return
         
-        print(f"Found {len(stations)} station(s) to process in {config_file}")
+        print(f"Found {len(stations)} station(s) to process in {config_file}", flush=True)
         
         success_count = 0
         error_count = 0
         
         for i, station in enumerate(stations, 1):
-            print(f"Processing station {i}/{len(stations)}: {station}")
+            print(f"Processing station {i}/{len(stations)}: {station}", flush=True)
             try:
                 merge_months(MONTH_PATH, station.upper(), target_date, domain=domain)
-                print(f"  ✓ Successfully processed {station}")
+                print(f"  ✓ Successfully processed {station}", flush=True)
                 success_count += 1
             except Exception as e:
-                print(f"  ✗ Error processing {station}: {e}")
+                print(f"  ✗ Error processing {station}: {e}", flush=True)
                 error_count += 1
         
-        print(f"\n{domain.upper()} Summary: {success_count} successful, {error_count} errors")
+        print(f"\n{domain.upper()} Summary: {success_count} successful, {error_count} errors", flush=True)
                 
     except Exception as e:
-        print(f"Error processing {domain} stations: {e}")
+        print(f"Error processing {domain} stations: {e}", flush=True)
 
 
 def parse_arguments():
@@ -148,17 +149,17 @@ Examples:
 
 def list_stations():
     """List all available stations from both config files."""
-    print("Available stations:")
+    print("Available stations:", flush=True)
     
     for domain, config_file in STATION_CONFIGS.items():
         try:
             station_conf = load_station_config(config_file)
             stations = station_conf["station"].tolist()
-            print(f"\n{domain.upper()} domain ({len(stations)} stations):")
+            print(f"\n{domain.upper()} domain ({len(stations)} stations):", flush=True)
             for i, station in enumerate(stations, 1):
-                print(f"  {i:2d}. {station}")
+                print(f"  {i:2d}. {station}", flush=True)
         except Exception as e:
-            print(f"\n{domain.upper()} domain: Error loading {config_file} - {e}")
+            print(f"\n{domain.upper()} domain: Error loading {config_file} - {e}", flush=True)
 
 
 def main():
@@ -174,12 +175,12 @@ def main():
     try:
         target_date = dt.datetime.strptime(args.date, "%Y-%m-%d").date()
     except ValueError as e:
-        print(f"Error: Invalid date format '{args.date}'. Use YYYY-MM-DD format.")
+        print(f"Error: Invalid date format '{args.date}'. Use YYYY-MM-DD format.", flush=True)
         return
     
-    print(f"Processing data for date: {target_date}")
+    print(f"Processing data for date: {target_date}", flush=True)
     if args.station:
-        print(f"Processing only station: {args.station}")
+        print(f"Processing only station: {args.station}", flush=True)
     
     # Determine which domains to process
     domains_to_process = []
@@ -197,9 +198,10 @@ def main():
         try:
             process_stations(config_file, domain, target_date, args.station)
         except Exception as e:
-            print(f"Critical error processing {domain} domain: {e}")
+            print(f"Critical error processing {domain} domain: {e}", flush=True)
     
-    print(f"\n=== Processing completed for {target_date} ===")
+    print(f"\n=== Processing completed for {target_date} ===", flush=True)
+    sys.stdout.flush()  # Ensure all output is written
 
 
 if __name__ == "__main__":
