@@ -17,3 +17,4 @@ flexpartset_nest.sh
 flexpartset.sh
 run_africa_global.sh
 runmonthly.sh
+__pycache__/
